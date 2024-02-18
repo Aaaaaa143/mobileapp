@@ -1,0 +1,65 @@
+class Mobiles(models.Model):
+    name=models.CharField(max_length=200,unique=True)
+    price=models.PositiveIntegerField()
+    spec=models.CharField(max_length=200)
+    brand=models.CharField(max_length=200)
+    display=models.CharField(max_length=200)
+
+
+
+    
+    orm queries:
+
+    create  
+
+    modelname.objects.create(filename="value",......)
+
+    eg:
+    >from mobile.models import Mobiles
+    >Mobiles.objects.create(name="redmi12notepro",price=320000,brand="redmi",spec="12gb RAM",display="led")
+
+
+
+  ===============  orm query for fetching all records===============
+
+  >Models_name.objects.all()
+  
+  >qs=Mobiles.objects.all()
+  >qs
+
+
+selecting a specific object: 
+
+  qs=ModelName.objects.get(id=2)
+
+
+filtering objects:-----
+
+qs=ModelName.objects.filter(brand="samsung")
+
+field lookup 
+
+<= : ModelName.objects.filter(price__lte=50000)
+>= : gte
+> : gt
+
+excluding :
+   ModelName.objects.exclude(brand="samsung")
+
+deleting an object : 
+
+     ModelName.objects.filter(id=3).delete() 
+
+
+updating an object:
+      ModelName.objects.filter(id=1).update(price=25000,specs="18gb")   
+
+
+ordering/sorting
+     ModelName.objects.all().order_by("price")   ascending          
+      ModelName.objects.all().order_by("-price") descending
+
+
+select a specific column
+     Mobiles.objects.all().values_list("brand",flat=True)
+      qs=Mobiles.objects.all().values_list("brand",flat=True).distinct()
